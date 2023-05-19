@@ -20,6 +20,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Download yolo pt files
+      run: |
+        wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt
+        wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt
+        wget https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5n.pt
+        wget https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5x6.pt
     - name: Test with pytest
       run: |
         pytest
