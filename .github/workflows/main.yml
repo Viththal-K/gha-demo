@@ -3,7 +3,7 @@ name: Pulse-keeper CI/CD Pipeline
 on:
   push:
     branches:
-      - cicd-setup
+      - '*'
   pull_request:
     branches:
       - main
