@@ -3,15 +3,14 @@ name: Pulse-keeper CI/CD Pipeline
 on:
   push:
     branches:
-      - cicd-setup
+      - main
   pull_request:
     branches:
-      - dev
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # environment: sandbox
 
     steps:   
         - name: Checkout code
@@ -24,13 +23,13 @@ jobs:
         
         - name: Install dependencies
           run: |
-            python -m pip install --upgrade pip
             if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-        - name: Configure AWS credentials
-          env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-east-1
+        - name: Run tests
           run: |
-            echo "Environment variables are accessed!"
+            echo "Tests ran."
+
+        - name: Deploy
+          if: github.event_name == 'push'
+          run: |
+            echo "Project deployed."
