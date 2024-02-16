@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    environment: ${{ github.ref == 'refs/heads/cicd-setup' && 'dev' || github.ref == 'refs/heads/stage' && 'stage' || github.ref == 'refs/heads/prod' && 'prod' || '' }}
+    environment: ${{ github.ref == 'refs/heads/cicd-setup' && 'cicd-setup' || github.ref == 'refs/heads/stage' && 'stage' || github.ref == 'refs/heads/prod' && 'prod' || '' }}
       
     steps:   
         - name: Checkout code
@@ -33,7 +33,7 @@ jobs:
             echo "Tests ran."
 
         - name: Deploy
-          if: github.event_name == 'push'
+          if: github.event_name == 'push' && (github.ref == 'refs/heads/cicd-setup' || github.ref == 'refs/heads/stage' || github.ref == 'refs/heads/prod')
           env: 
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
