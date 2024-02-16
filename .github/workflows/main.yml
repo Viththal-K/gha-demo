@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    environment: ${{ github.ref == 'refs/heads/cicd-setup' && 'cicd-setup' || github.ref == 'refs/heads/stage' && 'stage' || github.ref == 'refs/heads/prod' && 'prod' || '' }}
+    environment: ${{ github.ref == 'refs/heads/cicd-setup' && 'dev' || github.ref == 'refs/heads/stage' && 'stage' || github.ref == 'refs/heads/prod' && 'prod' || '' }}
       
     steps:   
         - name: Checkout code
