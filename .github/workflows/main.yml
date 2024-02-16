@@ -3,7 +3,7 @@ name: Pulse-keeper CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - cicd-setup
   pull_request:
     branches:
       - main
@@ -27,6 +27,7 @@ jobs:
 
         - name: Run tests
           run: |
+            echo ${{ github.head_ref || github.ref_name }}
             echo "Tests ran."
 
         - name: Deploy
